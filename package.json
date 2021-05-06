@@ -3,6 +3,6 @@
       "start": "http-server docs -p 8080"
     },
     "devDependencies": {
-    "http-server": "^0.12.3"
+      "http-server": "^0.12.3"
   }
 }
