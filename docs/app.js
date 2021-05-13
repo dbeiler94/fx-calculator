@@ -1,3 +1,6 @@
+let installPromptYes = false;
+let installPromptNo = false;
+
 document.querySelectorAll('select').forEach(element => {
     element.innerHTML = `
         <option value="EUR">EUR</option>
@@ -23,7 +26,7 @@ function round(value, decimals) {
     return (Math.round(value * 100) / 100).toFixed(decimals);
 }
 
-document.querySelector('main > button').addEventListener('click', async () => {        
+document.getElementById('calc').addEventListener('click', async () => {        
     const inputCurrency = document.querySelector('[name="input-currency"]').value;
     const outputCurrency = document.querySelector('[name="output-currency"]').value;    
     const inputValue = document.querySelector('[name="input-value"]').value;
@@ -32,14 +35,25 @@ document.querySelector('main > button').addEventListener('click', async () => {
 });
 
 window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    const article = document.querySelector('article');
-    article.style['display'] = 'block';
-    document.querySelector('#yes').addEventListener('click', () => {
-        event.prompt();
-        article.style['display'] = 'none';
-    });
-    document.querySelector('#no').addEventListener('click', () => {
-        article.style['display'] = 'none';
-    });
+    if(installPromptYes === false){
+        event.preventDefault();
+        const article = document.querySelector('article');
+        if(installPromptNo === false){
+            article.style['display'] = 'block';
+        }
+        document.querySelector('#yes').addEventListener('click', () => {
+            event.prompt();
+            event.userChoice.then(function(choiceResult) {
+                if(choiceResult.outcome === 'accepted'){
+                    installPromptYes = true;
+                } else {
+                    installPromptNo = true;
+                }
+            });
+            article.style['display'] = 'none';
+        });
+        document.querySelector('#no').addEventListener('click', () => {
+            article.style['display'] = 'none';
+        });
+    } 
 });

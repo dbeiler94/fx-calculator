@@ -9,8 +9,8 @@
     <link rel="apple-touch-icon" href="icon192.png">
     <title>Fx Calculator PWA</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.webmanifest">
     <script defer src="app.js"></script> 
+    <link rel="manifest" href="manifest.webmanifest">
     <script>        
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
@@ -30,7 +30,7 @@
             <input id="output-value" name="output-value" readonly>
             <select title="Output Currency" id="output-currency" name="output-currency"></select>
         </section>
-        <button>Calculate</button>
+        <button id="calc">Calculate</button>
     </main>
     <article>
         <h3>Do you want to install the App?</h3>
